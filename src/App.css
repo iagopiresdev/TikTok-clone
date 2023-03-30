@@ -12,6 +12,7 @@ html{
   height: 100dvh;
   display: flex;  
   justify-content: center;
+  background-color: black;
 }
 
 .app_videos{

@@ -19,7 +19,7 @@
 
 .videoFooterMusic__text{
     width: 75%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .videoFooterMusic__text p{
@@ -53,3 +53,13 @@
         transform: translateX(-100%);
     }
 }
+
+@media only screen and (max-width: 440px){
+    .videoFooter{
+        bottom: 22%;
+    }
+    .videoFooter__text{
+        width: 78%;
+        
+    }
+  }

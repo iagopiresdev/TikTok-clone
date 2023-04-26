@@ -1,42 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import Video from './assets/components/Video';
-import db from "./config/firebase";
-import { collection, getDocs } from 'firebase/firestore/lite';
+import { VideoProps } from './assets/components/types/VideoProps';
+import { useVideos } from './assets/components/hooks/useVideos';
 
-function App() {
-  const [video, setVideos] = useState([]);
+function AppContainer() {
+  const videos = useVideos();
 
-  async function getVideos() {
-    const videosCollection = collection(db, 'videos');
-    const videoSnapshot = await getDocs(videosCollection);
-    const videoList: any = videoSnapshot.docs.map(doc => doc.data());
-    setVideos(videoList);
-  }
-
-  useEffect(() => {
-    getVideos();
-  }, []);
-
- return (
+  return (
     <div className="app">
       <div className="app_videos">
-        {video.map((item:any) => {
-          return (
-            <Video
-              likes={item.likes}
-              messages={item.messages}
-              shares={item.shares}
-              name={item.name}
-              description={item.description}
-              music={item.music}
-              url={item.url}
-            />
-          );
-        })}
+        {videos.map((video: VideoProps) => (
+          <Video          
+          description={video.description}
+          likes={video.likes}
+          messages={video.messages}          
+          music={video.music}          
+          name={video.name}
+          shares={video.shares}          
+          url={video.url}
+        />
+        
+        ))}
       </div>
     </div>
   );
 }
 
-export default App;
+export default AppContainer;
+
+// Path: src/assets/components/hooks/useVideos.tsx

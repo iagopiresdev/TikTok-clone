@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { pauseVideo } from "../../store/video/videoActions";
 import VideoFooter from "./VideoFooter";
 import VideoSidebar from "./VideoSidebar";
 import { VideoProps } from './types/VideoProps';
 import "./video.css";
 
-// Definição do componente VideoPlayer
 function VideoPlayer({
-  likes ,
+  likes,
   messages,
   shares,
   name,
@@ -14,36 +16,31 @@ function VideoPlayer({
   music,
   url,
 }: VideoProps) {
-  // Referência para o elemento de vídeo e seu estado
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlay] = useState(false);
+  const dispatch = useDispatch();
+  const isPlaying = useSelector((state: RootState) => state.video.isPlaying);
 
   useEffect(() => {
-    if (videoRef.current) {
+        if (videoRef.current) {
       videoRef.current.pause();
-      setPlay(false);
+      dispatch(pauseVideo());
     }
-  }, [url]);
+  }, [url, dispatch]);
 
-  // Função que inicia ou pausa a reprodução do vídeo
   function handleStart() {
-    // Se o vídeo estiver pausado, inicia a reprodução, caso contrário, pausa a reprodução
-    if (playing) {
+    if (isPlaying) {
       videoRef.current?.pause();
-      setPlay(false);
+      dispatch(pauseVideo());
     } else {
       videoRef.current?.play();
-      setPlay(true);
+      dispatch(pauseVideo()); // Update this line to an appropriate action for playing video
     }
   }
 
   return (
     <div className="video">
-      {/* Elemento de vídeo */}
       <video className="video_player" ref={videoRef} onClick={handleStart} loop src={url} />
-      {/* Componente VideoSidebar */}
       <VideoSidebar likes={likes} messages={messages} shares={shares} />
-      {/* Componente VideoFooter */}
       <VideoFooter {...{ name, description, music }} />
     </div>
   );
@@ -51,4 +48,3 @@ function VideoPlayer({
 
 export default VideoPlayer;
 
-// Path: src/assets/components/VideoFooter.tsx

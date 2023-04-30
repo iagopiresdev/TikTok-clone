@@ -1,12 +1,8 @@
-import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import "./VideoPlayer.css";
+import { useRef, useState } from "react";
+import { VideoProps } from './types/VideoProps';
 import VideoFooter from "./VideoFooter";
 import VideoSidebar from "./VideoSidebar";
-import { VideoProps } from './types/VideoProps';
-import "./VideoPlayer.css";
-import { setPlaying } from "../store/video/videoReducer";
-import { RootState } from "../store/store";
-import { useState } from "react";
 
 
 function VideoPlayer({

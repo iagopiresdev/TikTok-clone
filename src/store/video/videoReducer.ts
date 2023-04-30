@@ -1,21 +1,22 @@
-import { PAUSE_VIDEO, VideoActionTypes } from "./videoTypes";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface VideoState {
-  isPlaying: boolean;
+  playing: boolean;
 }
 
 const initialState: VideoState = {
-  isPlaying: true,
+  playing: false,
 };
 
-export function videoReducer(state = initialState, action: VideoActionTypes): VideoState {
-  switch (action.type) {
-    case PAUSE_VIDEO:
-      return {
-        ...state,
-        isPlaying: false,
-      };
-    default:
-      return state;
-  }
-}
+export const videoSlice = createSlice({
+  name: 'video',
+  initialState,
+  reducers: {
+    setPlaying: (state, action: PayloadAction<boolean>) => {
+      state.playing = action.payload;
+    },
+  },
+});
+
+export const { setPlaying } = videoSlice.actions;
+export default videoSlice.reducer;

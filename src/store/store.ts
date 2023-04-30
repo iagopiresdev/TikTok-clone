@@ -1,12 +1,12 @@
-import { createStore, combineReducers } from "redux";
-import { videoReducer } from "./video/videoReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import  videoReducer  from "./video/videoReducer";
 
-const rootReducer = combineReducers({
-  video: videoReducer,
+const store = configureStore({
+  reducer: {
+    video: videoReducer,
+  },
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
-
-const store = createStore(rootReducer);
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

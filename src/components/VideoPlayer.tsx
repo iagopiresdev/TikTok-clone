@@ -1,12 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import VideoFooter from "./VideoFooter";
 import VideoSidebar from "./VideoSidebar";
 import { VideoProps } from './types/VideoProps';
-import "./video.css";
+import "./VideoPlayer.css";
+import { setPlaying } from "../store/video/videoReducer";
+import { RootState } from "../store/store";
+import { useState } from "react";
 
-// Definição do componente VideoPlayer
+
 function VideoPlayer({
-  likes ,
+  likes,
   messages,
   shares,
   name,
@@ -14,27 +18,15 @@ function VideoPlayer({
   music,
   url,
 }: VideoProps) {
-  // Referência para o elemento de vídeo e seu estado
+
+  // Referência para o elemento de vídeo e estado para controlar a reprodução
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlay] = useState(false);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setPlay(false);
-    }
-  }, [url]);
-
   // Função que inicia ou pausa a reprodução do vídeo
   function handleStart() {
-    // Se o vídeo estiver pausado, inicia a reprodução, caso contrário, pausa a reprodução
-    if (playing) {
-      videoRef.current?.pause();
-      setPlay(false);
-    } else {
-      videoRef.current?.play();
-      setPlay(true);
-    }
+    videoRef.current?.paused ? videoRef.current?.play() : videoRef.current?.pause();
+    setPlay((prevState) => !prevState);
   }
 
   return (
@@ -50,5 +42,3 @@ function VideoPlayer({
 }
 
 export default VideoPlayer;
-
-// Path: src/assets/components/VideoFooter.tsx

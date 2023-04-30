@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { VideoProps } from "../types/VideoProps";
-import db from "../../config/firebase";
+import db from "../config/firebase";
 import { collection, getDocs } from 'firebase/firestore/lite';
 
 export const useVideos = (): VideoProps[] => {

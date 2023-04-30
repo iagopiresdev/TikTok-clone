@@ -1,6 +1,6 @@
 import "./VideoPlayer.css";
 import { useRef, useState } from "react";
-import { VideoProps } from './types/VideoProps';
+import { VideoProps } from '../types/VideoProps';
 import VideoFooter from "./VideoFooter";
 import VideoSidebar from "./VideoSidebar";
 

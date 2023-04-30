@@ -1,8 +1,7 @@
-import React from 'react';
 import './App.css';
-import VideoPlayer  from "./components/VideoPlayer";
-import { VideoProps } from './components/types/VideoProps';
-import { useVideos } from './components/hooks/usevideos';
+import { VideoPlayer }  from "./components/videoComponents";
+import { VideoProps } from './types/VideoProps';
+import { useVideos } from './hooks/usevideos';
 
 function AppContainer() {
   const videos = useVideos();
